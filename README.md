@@ -1,3 +1,4 @@
+#                   Academai
 # AI Academic Assistant
 
 Next.js (App Router) + TypeScript + Tailwind CSS application that uses **Groq** (OpenAI-compatible API) to:
