@@ -1,4 +1,3 @@
-// @ts-expect-error server-only
 import 'server-only';
 import OpenAI from 'openai';
 

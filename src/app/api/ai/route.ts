@@ -28,7 +28,9 @@ export async function POST(req: NextRequest) {
     const body: ApiRequest = await req.json();
     const parsed = schema.safeParse(body);
     if (!parsed.success) {
-      throw new Error(parsed.error.errors[0].message);
+      const error = parsed.error;
+      const msg = error.issues[0]?.message || error.message || 'Input validation failed';
+      throw new Error(msg);
     }
 
     const { input, mode, explainLevel, quizCount, quizDifficulty } = parsed.data;
