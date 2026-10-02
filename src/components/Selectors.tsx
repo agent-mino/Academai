@@ -1,4 +1,8 @@
-import { Mode } from '@/lib/types';
+import { ApiRequest, Mode } from '@/lib/types';
+
+type ExplainLevel = NonNullable<ApiRequest['explainLevel']>;
+type QuizCount = NonNullable<ApiRequest['quizCount']>;
+type QuizDifficulty = NonNullable<ApiRequest['quizDifficulty']>;
 
 export function Selectors({
   mode, setMode,
@@ -30,7 +34,7 @@ export function Selectors({
       {mode === 'explain' && (
         <select
           value={explainLevel}
-          onChange={(e) => setExplainLevel(e.target.value as any)}
+          onChange={(e) => setExplainLevel(e.target.value as ExplainLevel)}
           className="bg-black/40 border border-white/10 text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-white/30 transition-all min-w-[160px]"
         >
           <option value="eli5">ELI5</option>
@@ -43,7 +47,7 @@ export function Selectors({
         <div className="flex gap-4 flex-wrap">
           <select
             value={quizCount}
-            onChange={(e) => setQuizCount(e.target.value as any)}
+            onChange={(e) => setQuizCount(e.target.value as QuizCount)}
             className="bg-black/40 border border-white/10 text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-white/30 transition-all"
           >
             <option value="5">5 Questions</option>
@@ -52,7 +56,7 @@ export function Selectors({
 
           <select
             value={quizDifficulty}
-            onChange={(e) => setQuizDifficulty(e.target.value as any)}
+            onChange={(e) => setQuizDifficulty(e.target.value as QuizDifficulty)}
             className="bg-black/40 border border-white/10 text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-white/30 transition-all"
           >
             <option value="easy">Easy</option>

@@ -7,7 +7,9 @@ import { getHistory } from '@/lib/utils';
 export function History() {
   const [history, setHistory] = useState<HistoryItem[]>([]);
 
+  // localStorage is only available after hydration, so this has to run in an effect.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setHistory(getHistory());
   }, []);
 

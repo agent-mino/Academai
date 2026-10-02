@@ -1,10 +1,16 @@
-const limits = new Map<string, number>(); // IP -> last request time
-const RATE_LIMIT_MS = 60000; // 1 min
+const WINDOW_MS = 60_000; // 1 minute
+const MAX_REQUESTS = 6; // per IP per window
+
+const hits = new Map<string, number[]>(); // IP -> request timestamps inside the window
 
 export function rateLimit(ip: string): boolean {
   const now = Date.now();
-  const last = limits.get(ip) || 0;
-  if (now - last < RATE_LIMIT_MS) return false;
-  limits.set(ip, now);
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
+  if (recent.length >= MAX_REQUESTS) {
+    hits.set(ip, recent);
+    return false;
+  }
+  recent.push(now);
+  hits.set(ip, recent);
   return true;
 }
